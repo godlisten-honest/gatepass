@@ -1,0 +1,151 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-lime elevation-4">
+      <!-- Brand Logo -->
+      <a href="{% url 'admin_home' %}" class="brand-link">
+        <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">JECRC</span>
+      </a>
+
+      <!-- Sidebar -->
+
+
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+
+            <li class="nav-item">
+              {% url 'admin_home' as admin_home %}
+              <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+                <i class="nav-icon fas fa-home"></i>
+                <p>
+                  Home
+                </p>
+              </a>
+            </li>
+
+            {% url 'manage_staff' as manage_staff %}
+            {% url 'add_staff' as add_staff %}
+            {% url 'edit_staff' staff_id=id as edit_staff %}
+            {% url 'grant_role' staff_id=id as grant_role %}
+            {% url 'staff_trash' as staff_trash %}
+            <li class="nav-item 
+            {% if request.path == manage_staff %} menu-open {% endif %} 
+            {% if request.path == edit_staff %} menu-open {% endif %}
+            {% if request.path == grant_role %} menu-open {% endif %}
+            {% if request.path == add_staff %} menu-open {% endif %}
+            {% if request.path == staff_trash %} menu-open {% endif %}">
+              <a href="#" class="nav-link 
+              {% if request.path == manage_staff %} active {% endif %} 
+              {% if request.path == edit_staff %} active {% endif %}
+              {% if request.path == grant_role %} active {% endif %}
+              {% if request.path == add_staff %} active {% endif %}
+              {% if request.path == staff_trash %} active {% endif %}">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>
+                  Manage Staff
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ manage_staff }}" class="nav-link 
+                  {% if request.path == manage_staff %} active {% endif %} 
+                  {% if request.path == edit_staff %} active {% endif %}
+                  {% if request.path == grant_role %} active {% endif %}">
+                    <i class="far fa-circle text-primary nav-icon"></i>
+                    <p>
+                      View Staff
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ add_staff }}" class="nav-link {% if request.path == add_staff %} active {% endif %}">
+                    <i class="nav-icon far fa-circle text-secondary"></i>
+                    <p>
+                      Add Staff
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'staff_trash' %}" class="nav-link {% if request.path == staff_trash %} active {% endif %}">
+                    <i class="far fa-circle text-danger nav-icon"></i>
+                    <p>Trash</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            {% url 'manage_role' as manage_role %}
+            {% url 'add_role' as add_role %}
+            {% url 'edit_role' role_id=id as edit_role %}
+            <li class="nav-item 
+            {% if request.path == manage_role %} menu-open {% endif %} 
+            {% if request.path == edit_role %} menu-open {% endif %}
+            {% if request.path == add_role %} menu-open {% endif %}">
+              <a href="#" class="nav-link 
+              {% if request.path == manage_role %} active {% endif %} 
+              {% if request.path == edit_role %} active {% endif %}
+              {% if request.path == add_role %} active {% endif %}">
+                <i class="nav-icon fas fa-tasks"></i>
+                <p>
+                  Manage Role
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ manage_role }}" class="nav-link 
+                  {% if request.path == manage_role %} active {% endif %} 
+                  {% if request.path == edit_role %} active {% endif %}">
+                    <i class="far fa-circle text-primary nav-icon"></i>
+                    <p>
+                      View Role
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ add_role }}" class="nav-link {% if request.path == add_role %} active {% endif %}">
+                    <i class="nav-icon far fa-circle text-secondary"></i>
+                    <p>
+                      Add Role
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              {% url 'staff_leave_view' as staff_leave_view %}
+              <a href="{{ staff_leave_view }}" class="nav-link {% if request.path == staff_leave_view %} active {% endif %}">
+                <i class="nav-icon fas fa-scroll"></i>
+                <p>
+                  Staff Reports
+                </p>
+              </a>
+            </li>
+          
+            <li class="nav-item">
+              {% url 'staff_feedback_message' as staff_feedback_message %}
+              <a href="{{ staff_feedback_message }}" class="nav-link {% if request.path == staff_feedback_message %} active {% endif %}">
+                <i class="nav-icon fas fa-comments"></i>
+                <p>
+                  Staff Feedback
+                </p>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>

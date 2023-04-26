@@ -1,0 +1,62 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Edit Role | Role ID: {{role.id}}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-pink card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Role</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'edit_role_save' %}">
+                        {% csrf_token %}
+                            
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Role Name</label>
+                                <input type="text" class="form-control" name="name" value="{{role.name}}" placeholder="Role Name">
+                                <input type="hidden" name="role_id" value="{{role.id}}">
+                            </div>
+                            
+                            <label>Permissions</label>
+                            <div class="form-group row">
+                                {% for perm in permission %}
+                                <div class="col-md-3">
+                                    {% if perm in role.permissions.all %}
+                                    <input type="checkbox" checked name="{{perm.name}}" value="{{perm.id}}"> {{perm.name}} 
+                                    {% else %}
+                                    <input type="checkbox" name="{{perm.name}}" value="{{perm.id}}"> {{perm.name}} 
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Edit Role</button>
+                        </div>
+                    </form>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}

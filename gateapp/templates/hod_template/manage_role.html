@@ -1,0 +1,74 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Manage Role
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <a class="btn btn-primary" href="{% url 'add_role' %}" role="button">+ Add Role</a> <br/>&nbsp;
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Staff Details</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered 
+                           table-hover table-striped text-nowrap">
+                            <thead>
+                                <tr>
+                                <th>Name</th>
+                                <th>Permissions</th>
+                                <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for role in role %}
+                                <tr>
+                                <td>{{ role.name }}</td>
+                                <td>
+                                    <select name="">
+                                        {% for perm in role.permissions.all %}
+                                        <option value="">{{perm.name}}<br></option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+												
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a class="btn btn-info" href="{% url 'edit_role' role.id %}">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="{% url 'delete_role' role.id %}" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        </div>
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}

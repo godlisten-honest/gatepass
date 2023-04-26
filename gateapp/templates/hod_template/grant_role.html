@@ -1,0 +1,56 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+Grant Role to | Username: {{ staff.username }} | #ID : {{ staff.id }}
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Grant Role</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'grant_role_save' %}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            <label>Roles</label>
+                            <input type="hidden" name="staff_id" value="{{staff.id}}">
+                            <div class="form-group row">
+                                {% for role in role %}
+                                <div class="col-md-12">
+                                    {% if role in staff.groups.all %}
+                                    <input type="checkbox" checked name="{{role.name}}" value="{{role.id}}">
+                                    {{role.name}}
+                                    {% else %}
+                                    <input type="checkbox" name="{{role.name}}" value="{{role.id}}"> {{role.name}}
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Update Staff</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+
+            </div>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
+
+{% endblock main_content %}
