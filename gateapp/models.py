@@ -11,6 +11,9 @@ class CustomUser(AbstractUser):
 	is_deleted = models.BooleanField(default=False)
 	deleted_at = models.DateTimeField(null=True,blank=True)
 
+	# def __str__(self) -> str:
+    #     		return self.phone
+
 class Report(models.Model):
 	id = models.AutoField(primary_key=True)
 	user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -22,6 +25,9 @@ class Report(models.Model):
 	created_at = models.DateField(auto_now_add=True)
 	objects = models.Manager()
 
+	def __str__(self) -> str:
+		return self.user_id.phone
+
 
 class FeedBack(models.Model):
 	id = models.AutoField(primary_key=True)
@@ -31,6 +37,9 @@ class FeedBack(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	objects = models.Manager()
+ 
+	def __str__(self) -> str:
+		return self.feedback
 
 
 
